@@ -47,7 +47,10 @@ router.post("/signup", (req, res, next) => {
           // we create the user in the database
           .then((hashedPassword) => {
             return User.create({
+              // we don't use username: username because the key and the value have the same name
               username,
+              // the key in the model is called "password", but the value is the hashed password
+              // in this case we can't just write hashedPassword
               password: hashedPassword,
             });
           })
